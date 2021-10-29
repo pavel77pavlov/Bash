@@ -1,0 +1,41 @@
+amazStop(){
+    name=$1
+
+    awscolumn=$(aws ec2 describe-instances --output 'text' --query 'Reservations[*].Instances[*].{Instance:InstanceId}' --filters "Name=tag:Name,Values=$name"|tr '\n' ' ')
+    
+
+    aws ec2 stop-instances  --instance-ids $(echo "$awscolumn") &>>/dev/null
+
+    probe1=$(aws ec2 describe-instances --instance-id $(echo "$awscolumn")  --query 'Reservations[*].Instances[*].{Instance:InstanceId,Name:Tags[?Key==`Name`]|[0].Value,Status:State.Name}'  --output table)
+
+    for i in {1,2,3,4,5,6};do
+       echo "$probe1"
+       sleep 25
+       clear
+    done
+
+
+    #aws ec2 describe-instance-status --instance-ids $(echo "$awscolumn") --query 'InstanceStatuses[].InstanceState[].Name[]' --output "text"
+
+
+    }
+
+amazStart(){
+    name=$1
+    awscolumn=$(aws ec2 describe-instances --output 'text' --query 'Reservations[*].Instances[*].{Instance:InstanceId}' --filters "Name=tag:Name,Values=$name"|tr '\n' ' ')
+    aws_stat=$(aws ec2 describe-instance-status --instance-ids $(echo "$awscolumn") --query 'InstanceStatuses[].InstanceState[].Name[]' --output "text")
+
+    aws ec2 start-instances --instance-ids $(echo "$awscolumn") &>>/dev/null
+    }
+
+amazStat(){
+   name=$1
+   awscolumn=$(aws ec2 describe-instances --output 'text' --query 'Reservations[*].Instances[*].{Instance:InstanceId}' --filters "Name=tag:Name,Values=$name"|tr '\n' ' ')
+   probe1=$(aws ec2 describe-instances --instance-id $(echo "$awscolumn")  --query 'Reservations[*].Instances[*].{Instance:InstanceId,Name:Tags[?Key==`Name`]|[0].Value,Status:State.Name}'  --output table)
+   echo "$probe1"
+   
+   ###Also you can switch to this option if you want to see colored Table and you need to exit with 'q'
+   #aws ec2 describe-instances --instance-id $(echo "$awscolumn")  --query 'Reservations[*].Instances[*].{Instance:InstanceId,Name:Tags[?Key==`Name`]|[0].Value,Status:State.Name}'  --output table)
+   
+
+}
