@@ -1,0 +1,31 @@
+name: invoke-aws-lambda
+  # You may pin to the exact commit or the version.
+  # uses: gagoar/invoke-aws-lambda@d3a63ccabbed6ef817604ef6320096bde576ad40
+  uses: invoke-aws-lambda
+  with:
+    # AWS_ACCESS_KEY_ID
+    AWS_ACCESS_KEY_ID: 
+    # AWS_SECRET_ACCESS_KEY
+    AWS_SECRET_ACCESS_KEY: 
+    # AWS_SESSION_TOKEN
+    AWS_SESSION_TOKEN: # optional
+    # region where the lambda has been created (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
+    REGION: # optional, default is us-east-1
+    # The name of the Lambda function, version, or alias
+    FunctionName: 
+    # Choose from the following options: RequestResponse, Event, DryRun
+    InvocationType: # optional, default is RequestResponse
+    # Choose from the following options: None, Tail
+    LogType: # optional, default is None
+    # Up to 3583 bytes of base64-encoded data about the invoking client to pass to the function in the context object.
+    ClientContext: # optional
+    # The JSON that you want to provide to your Lambda function as input. (Buffer, Typed Array, Blob, String)
+    Payload: # optional
+    # Specify a version or alias to invoke a published version of the function.
+    Qualifier: # optional
+    # Sets the socket to timeout after timeout milliseconds of inactivity on the socket. Defaults to two minutes (120000)
+    HTTP_TIMEOUT: # optional
+    # Returns the maximum amount of retries to perform for a service request. By default this value is calculated by the specific service object that the request is being made to.
+    MAX_RETRIES: # optional
+    # Set to true if this action should succeed when the Lambda function executed returns an error
+    SUCCEED_ON_FUNCTION_FAILURE: # optional
