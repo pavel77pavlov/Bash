@@ -1,0 +1,21 @@
+[core]
+      repositoryformatversion = 0
+      filemode = false
+      bare = false
+      logallferupdates = true
+      symlink = false
+      ignorecase = true
+[remote "origin"]
+      url = https://github.com/pavel77pavlov/bash.git
+      fetch = +refs/headers/master
+[branch "master"]
+      remote = origin
+      merge = refs/headers/master
+ 
+ [branch "test1"]
+      remote = origin
+      merge = refs/headers/test1
+      
+ [branch "test2"]
+      remote = origin
+      merge = refs/headers/test2
