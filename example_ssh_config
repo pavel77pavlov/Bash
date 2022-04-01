@@ -1,0 +1,3 @@
+Host github.com
+  User pavel77pavlov
+  IdentityFile ~/.ssh/<name of file to pub key>
